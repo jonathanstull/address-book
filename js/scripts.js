@@ -27,9 +27,18 @@ function showContact(contactId) {
   buttons.append("<button class='deleteButton' id=" +  + contact.id + ">Delete</button>");
 }
 
+// This function will add (and eventually remove) form fields for new email addresses
+
+
+//  $("#checked").on("click", function() {
+//   let newEmailLabelField = "<label for='addidlater'>Additional Email</label>";
+//   let newEmailInputField = "<input id='addidlater' type='text'>";
+//   $("div.form-emails").html(newEmailLabelField);
+//   $("div.form-emails").html(newEmailInputField);
+//  })
+
 function attachContactListeners() {
   $("ul#contacts").on("click", "li", function() {
-    // console.log("The id of this <li> is " + this.id + ".");
     showContact(this.id); 
   });
   $("#buttons").on("click", ".deleteButton", function() {
@@ -37,6 +46,12 @@ function attachContactListeners() {
     $("#show-contact").hide();
     displayContactDetails(addressBook);
   });
+  $("#checked").click(function() {
+    let newEmailLabelField = "<label for='addidlater'>Additional Email</label>";
+    let newEmailInputField = "<input id='addidlater' type='text'>";
+    $("p#form-emails").append(newEmailLabelField);
+    $("p#form-emails").append(newEmailInputField);
+   })
 };
 
 $(document).ready(function() {
@@ -49,7 +64,6 @@ $(document).ready(function() {
     const inputtedEmail1 = $("input#new-email1").val();
     const inputtedEmail2 = $("input#new-email2").val();
     const inputtedEmail3 = $("input#new-email3").val();
-    console.log(inputtedEmail1, inputtedEmail2, inputtedEmail3);
     const inputtedAddress = $("input#new-address").val();
 
     // The next three lines are to make sure to empty out form fields after submission:
@@ -61,13 +75,10 @@ $(document).ready(function() {
     $("input#new-email3").val("");
     $("input#new-address").val("");
 
-    // create a new variable and assign the email addresses here and then pass that variable into the new Contact as a parameter
     let emailAddresses = new EmailAddresses(inputtedEmail1, inputtedEmail2, inputtedEmail3)
     console.log(emailAddresses);
     let newContact = new Contact(inputtedFirstName, inputtedLastName, inputtedPhoneNumber, emailAddresses, inputtedAddress);
-    // console.log(newContact) = {inputtedFirstName, inputtedLastName, inputtedPhoneNumber, array: [2], inputtedAddress)
     addressBook.addContact(newContact);
-    // console.log(addressBook.contacts);
     displayContactDetails(addressBook);
 
   });
@@ -105,7 +116,7 @@ AddressBook.prototype.deleteContact = function(id) {
 }
 
 // Business Logic for Contacts ---------
-// What we want to do (pseudo-code): function Contact(firstName, lastName, phoneNumber, emails{email1, email2, email3}, address}
+
 function Contact(firstName, lastName, phoneNumber, emails, address) {
   this.firstName = firstName;
   this.lastName = lastName;
@@ -120,7 +131,6 @@ Contact.prototype.fullName = function() {
 
 // Business Logic for Emails
 
-// if emails{email1, email2, email3}, then dot notation to access this object would be emails.email1, emails.email2, emails.email3, etc.
 function EmailAddresses(email1, email2, email3) {
   this.email1 = email1;
   this.email2 = email2;
