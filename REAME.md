@@ -13,3 +13,7 @@ Describe:
   Code: function Contact(firstName, lastName, phoneNumber, email, physicalAddress);
   Expected Output:
 
+  3. Test: "It records multiple email addresses and displays them"
+  Code: function EmailAddresses(email1, email2, email3);
+  Expected Output: 
+
