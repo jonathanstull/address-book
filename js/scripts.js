@@ -30,7 +30,7 @@ function showContact(contactId) {
 // This function will add (and eventually remove) form fields for new email addresses
 
 
-//  $("#checked").on("click", function() {
+//  $("#checked").on("click", function(
 //   let newEmailLabelField = "<label for='addidlater'>Additional Email</label>";
 //   let newEmailInputField = "<input id='addidlater' type='text'>";
 //   $("div.form-emails").html(newEmailLabelField);
@@ -38,6 +38,7 @@ function showContact(contactId) {
 //  })
 
 function attachContactListeners() {
+  let inputId = 0
   $("ul#contacts").on("click", "li", function() {
     showContact(this.id); 
   });
@@ -47,10 +48,11 @@ function attachContactListeners() {
     displayContactDetails(addressBook);
   });
   $("#checked").click(function() {
-    let newEmailLabelField = "<label for='addidlater'>Additional Email</label>";
-    let newEmailInputField = "<input id='addidlater' type='text'>";
+    let newEmailLabelField = "<label for=" + inputId + ">Additional Email</label>";
+    let newEmailInputField = "<input id="+ inputId + "type='text'>";
     $("p#form-emails").append(newEmailLabelField);
     $("p#form-emails").append(newEmailInputField);
+    inputId++
    })
 };
 
